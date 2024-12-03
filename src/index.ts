@@ -1,17 +1,21 @@
 import express, { Request, Response } from 'express';
 import dotenv from "dotenv"
+import { createServer } from 'http';
+import cors from "cors"
+import loginRoutes from "./login/login.route"
+import meetingRoutes from "./meeting/meeting.route"
+
 
 dotenv.config()
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
+app.use('/', loginRoutes)
+app.use('/meeting', meetingRoutes)
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
-});
-
+const server = createServer(app)
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+server.listen(port, () => {
+    console.log(`[server]: Server is running at http://localhost:${port}`);
+  });
