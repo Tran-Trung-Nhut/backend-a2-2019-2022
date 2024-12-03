@@ -4,6 +4,8 @@ import { createServer } from 'http';
 import cors from "cors"
 import loginRoutes from "./login/login.route"
 import meetingRoutes from "./meeting/meeting.route"
+import userRoutes from "./user/user.route"
+
 
 
 dotenv.config()
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/', loginRoutes)
 app.use('/meeting', meetingRoutes)
+app.use('/user', userRoutes)
 
 const server = createServer(app)
 const port = process.env.PORT || 3000;
