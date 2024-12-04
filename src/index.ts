@@ -5,6 +5,7 @@ import cors from "cors"
 import loginRoutes from "./login/login.route"
 import meetingRoutes from "./meeting/meeting.route"
 import userRoutes from "./user/user.route"
+import userMeetingRoutes from "./userMeeting/userMeeting.route"
 
 
 
@@ -16,6 +17,8 @@ app.use(cors());
 app.use('/', loginRoutes)
 app.use('/meeting', meetingRoutes)
 app.use('/user', userRoutes)
+app.use('/userMeeting', userMeetingRoutes)
+
 
 const server = createServer(app)
 const port = process.env.PORT || 3000;

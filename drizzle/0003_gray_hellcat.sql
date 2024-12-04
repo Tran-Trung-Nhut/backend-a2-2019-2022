@@ -1,0 +1,1 @@
+ALTER TABLE "userMeeting" ADD COLUMN "paid" varchar DEFAULT 'No' NOT NULL;

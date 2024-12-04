@@ -24,7 +24,8 @@ export const timeDescription = pgTable("timeDescription",{
 
 export const userMeeting = pgTable("userMeeting", {
     userId: uuid('userId').notNull().references(() => user.id), 
-    meetingId: uuid('meetingId').notNull().references(() => meeting.id), 
+    meetingId: uuid('meetingId').notNull().references(() => meeting.id),
+    paid: varchar('paid').notNull().default("No")
 }, (table) => {
     return{
         pk: primaryKey({ columns: [table.userId, table.meetingId], name: "pkUserMeeting"})
