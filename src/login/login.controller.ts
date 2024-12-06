@@ -19,21 +19,26 @@ class LoginController{
                     })
                 }
 
+                if(!existUser[0].phoneNumber){
+                    await db
+                    .update(user)
+                    .set({
+                        phoneNumber: phoneNumber
+                    })
+                    .where(eq(user.id, existUser[0].id))
+                    .returning()
 
-                const updatePhoneNumer = await db
-                .update(user)
-                .set({
-                    phoneNumber: phoneNumber
-                })
-                .where(eq(user.id, existUser[0].id))
-                .returning()
-
-                if(!updatePhoneNumer) {
-                    return res.status(400).json({
-                        message: "Có lỗi trong quá trình cập nhật số điện thoại"
+                    return res.status(200).json({
+                        message: "Login successfully!",
                     })
                 }
 
+                if(existUser[0].phoneNumber !== phoneNumber){
+                    return res.status(404).json({
+                        message: "Số điện thoại không chính xác! Vui lòng nhập lại!",
+                    })
+                }
+                
                 return res.status(200).json({
                     message: "Login successfully!",
                 })
