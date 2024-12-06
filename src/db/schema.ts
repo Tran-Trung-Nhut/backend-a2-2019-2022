@@ -31,3 +31,12 @@ export const userMeeting = pgTable("userMeeting", {
         pk: primaryKey({ columns: [table.userId, table.meetingId], name: "pkUserMeeting"})
     }
 });
+
+export const message = pgTable("message",{
+    id: uuid('id').defaultRandom().primaryKey(),
+    createDate: date('createDate').notNull().defaultNow(),
+    updateDate: date('updateDate').notNull().defaultNow(),
+    content: text("content"),
+    meetingId: uuid('meetingId').notNull().references(() => meeting.id),
+    userName: varchar('userName').notNull()
+})

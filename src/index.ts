@@ -6,6 +6,7 @@ import loginRoutes from "./login/login.route"
 import meetingRoutes from "./meeting/meeting.route"
 import userRoutes from "./user/user.route"
 import userMeetingRoutes from "./userMeeting/userMeeting.route"
+import messageRoutes from "./message/message.route"
 
 
 
@@ -18,10 +19,11 @@ app.use('/', loginRoutes)
 app.use('/meeting', meetingRoutes)
 app.use('/user', userRoutes)
 app.use('/userMeeting', userMeetingRoutes)
+app.use('/message', messageRoutes)
 
 
 const server = createServer(app)
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 server.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+    console.log(`[server]: Server is running at port:${port}`);
   });
