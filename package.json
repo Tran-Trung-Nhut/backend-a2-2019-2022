@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "date-fns-tz": "^3.2.0",
     "dotenv": "^16.4.6",
     "drizzle-kit": "^0.29.0",
     "drizzle-orm": "^0.37.0",

@@ -1,4 +1,4 @@
-import { date, pgTable, primaryKey, text, uuid, varchar } from "drizzle-orm/pg-core";
+import { date, pgTable, primaryKey, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
     id: uuid('id').primaryKey().defaultRandom(),
@@ -34,8 +34,8 @@ export const userMeeting = pgTable("userMeeting", {
 
 export const message = pgTable("message",{
     id: uuid('id').defaultRandom().primaryKey(),
-    createDate: date('createDate').notNull().defaultNow(),
-    updateDate: date('updateDate').notNull().defaultNow(),
+    createDate: timestamp('createDate', { withTimezone: true }),
+    updateDate: timestamp('updateDate', { withTimezone: true }),
     content: text("content"),
     meetingId: uuid('meetingId').notNull().references(() => meeting.id),
     userName: varchar('userName').notNull()
