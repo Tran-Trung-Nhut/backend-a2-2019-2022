@@ -112,6 +112,45 @@ class UserMeetingController{
             })
         }
     }
+
+    public listUserAcceptedName = async (req: Request, res: Response) => {
+
+        const { meetingId }  = req.params
+
+        try{
+                const meetingUser = await db
+                .select()
+                .from(userMeeting)
+                .where(eq(userMeeting.meetingId, meetingId))
+
+                if(meetingUser.length === 0){
+                    return res.status(404).json({
+                        message: "Buổi họp lớp này không tồn tại!"
+                    })
+                }
+
+                const listUserName : string[] = []
+
+                for(const u of meetingUser){
+                    const us = await db
+                    .select()
+                    .from(user)
+                    .where(eq(user.id, u.userId))
+                    
+                    listUserName.push(us[0].name)
+                }
+
+                return res.status(200).json({
+                    message: "Success!",
+                    data: listUserName
+                })
+        }catch(e){
+            console.log(e)
+            return res.status(500).json({
+                message: e
+            })
+        }
+    }
 }
 
 export default new UserMeetingController()
