@@ -1,0 +1,1 @@
+ALTER TABLE "user" ADD COLUMN "role" varchar(64) DEFAULT 'Thành viên tổ 2' NOT NULL;

@@ -3,7 +3,8 @@ import { date, pgTable, primaryKey, text, timestamp, uuid, varchar } from "drizz
 export const user = pgTable("user", {
     id: uuid('id').primaryKey().defaultRandom(),
     name: varchar('name', { length: 255 }).notNull(),
-    phoneNumber: varchar('phoneNumber', { length: 255 }).unique()
+    phoneNumber: varchar('phoneNumber', { length: 255 }).unique(),
+    role: varchar('role', { length: 64}).notNull().default("Thành viên tổ 2")
 });
 
 export const meeting = pgTable("meeting",{

@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { db } from "../db/db"
-import { meeting, timeDescription, user } from "../db/schema"
+import { user } from "../db/schema"
 import { eq } from "drizzle-orm"
 
 class UserController{
