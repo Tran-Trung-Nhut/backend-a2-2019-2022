@@ -30,6 +30,7 @@ class LoginController{
 
                     return res.status(200).json({
                         message: "Login successfully!",
+                        role: existUser[0].role
                     })
                 }
 
