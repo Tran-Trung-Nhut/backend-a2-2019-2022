@@ -23,8 +23,9 @@ RUN apt-get update -qq && \
 COPY package-lock.json package.json ./ 
 RUN npm ci --include=dev
 
-# Cài đặt TypeScript toàn cục để đảm bảo 'tsc' có sẵn
-RUN npm install -g typescript
+# Cài đặt TypeScript dưới dạng phụ thuộc cục bộ và thêm node_modules/.bin vào PATH
+RUN npm install typescript --save-dev
+ENV PATH="./node_modules/.bin:$PATH"
 
 # Copy application code
 COPY . .
