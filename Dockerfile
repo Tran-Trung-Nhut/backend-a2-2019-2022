@@ -20,11 +20,11 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
 # Install node modules
-COPY package-lock.json package.json ./
+COPY package-lock.json package.json ./ 
 RUN npm ci --include=dev
 
-# Install TypeScript as a local dependency
-RUN npm install typescript --save-dev
+# Cài đặt TypeScript toàn cục để đảm bảo 'tsc' có sẵn
+RUN npm install -g typescript
 
 # Copy application code
 COPY . .
