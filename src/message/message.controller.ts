@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { db } from "../db/db"
 import { message } from "../db/schema"
 import { eq } from "drizzle-orm"
-import { format, toZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 
 
 class MessageController{
