@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { db } from "../db/db"
 import { message } from "../db/schema"
-import { eq } from "drizzle-orm"
+import { eq, isNull } from "drizzle-orm"
 import { toZonedTime } from 'date-fns-tz';
 
 
@@ -52,6 +52,25 @@ class MessageController{
                     message: "Success!",
                     data: mess
                 })
+        }catch(e){
+            console.log(e)
+            return res.status(500).json({
+                message: e
+            })
+        }
+    }
+
+    public undoMessage = async (req: Request, res: Response) => {
+        const messageId = req.params.messageId
+        try{
+            await db
+            .update(message)
+            .set({updateDate: null})
+            .where(eq(message.id, messageId))
+
+            return res.status(200).json({
+                message: "Success!"
+            })
         }catch(e){
             console.log(e)
             return res.status(500).json({
