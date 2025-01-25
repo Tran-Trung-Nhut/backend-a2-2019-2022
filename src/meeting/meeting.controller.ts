@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { db } from "../db/db"
 import { meeting, timeDescription, user } from "../db/schema"
-import { eq } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 
 class MeetingController{
     public getMeetingYes = async (req: Request, res: Response) => {
@@ -61,6 +61,8 @@ class MeetingController{
                 const existMeeting = await db
                 .select()
                 .from(meeting)
+                .orderBy(desc(meeting.date))
+   
 
                 if(existMeeting.length === 0){
                     return res.status(404).json({
